@@ -20,5 +20,5 @@ def check_server(workdir):
     return server_status
 
 
-def restart_server(workdir):
+def start_server(workdir):
     return 'ok'

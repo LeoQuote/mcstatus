@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta name=”viewport” content=”width=width, initial-scale=1, maximum-scale=1″ charset="UTF-8">
     <title>MC服务器状态</title>
 </head>
 <body>
@@ -10,12 +10,12 @@
         <th>服务器</th>
         <th>服务器状态</th>
         <th>上次检查时间</th>
-  </tr>
-  {% for s in servers %}<tr>
-    <td>{{ s.name }}</td>
-    <td>{{ s.status }}</td>
-    <td>{{ s.last_checked_at }}</td>
-  </tr>{% endfor %}
+    </tr>
+    {% for s in servers %}<tr id="server{{ s.id }}">
+        <td>{{ s.name }}</td>
+        <td>{{ s.status }}</td>
+        <td>{{ s.last_checked_at }}</td>
+    </tr>{% endfor %}
 </table>
 </body>
 </html>

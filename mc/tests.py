@@ -49,3 +49,28 @@ class StatusViewTest(TestCase):
         r = c.get('/')
         self.assertTemplateUsed(r, 'status.html')
         self.assertContains(r, self.s1.name)
+
+
+class RestartViewTest(TestCase):
+
+    def setUp(self):
+        self.s1 = Server(name='test', description='some_test', directory='/home/work/some_dir', status='ok',
+                         last_checked_at=timezone.now())
+        self.s1.save()
+        self.s2 = Server(name='test', description='some_test', directory='/home/work/some_dir', status='not ok',
+                         last_checked_at=timezone.now())
+        self.s2.save()
+
+    def tearDown(self):
+        self.s1.delete()
+        self.s2.delete()
+
+    def test_restart_server(self):
+        c = Client()
+        r = c.post('/server/{}/start/'.format(self.s1.id))
+        # 已经ok的服务器不准重启
+        self.assertEqual(400, r.status_code)
+        r = c.post('/server/{}/start/'.format(self.s2.id))
+        self.assertContains(r, 'ok')
+
+

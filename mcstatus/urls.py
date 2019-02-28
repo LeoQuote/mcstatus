@@ -20,4 +20,5 @@ from mc import views as mc_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mc_views.statusView),
+    path('server/<int:server_id>/start/', mc_views.startView),
 ]

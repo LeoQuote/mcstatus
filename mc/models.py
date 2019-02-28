@@ -1,7 +1,7 @@
 from django.db import models
 from datetime import timedelta
 from django.utils import timezone
-from mc.utils import check_server, restart_server
+from mc.utils import check_server, start_server
 # Create your models here.
 
 
@@ -21,9 +21,9 @@ class Server(models.Model):
             super().save()
         return self.status
 
-    def restart_server(self):
+    def start_server(self):
         if self.status == 'ok':
             return 'ok'
         else:
-            restart_server(self.directory)
+            start_server(self.directory)
             return 'ok'
